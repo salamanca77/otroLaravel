@@ -20,7 +20,9 @@
     @livewireStyles
 </head>
 
-<body>
+<body x-data="{
+    open: false,
+}">
 
     @include('layouts.includes.admin.navigation')
 

@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\View\Component;
 use Illuminate\Contracts\View\View;
 
-class TicketLayout extends Component
+class ControlVehicularLayout extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class TicketLayout extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('layouts.ticket');
+        return view('layouts.control_vehicular');
     }
 }

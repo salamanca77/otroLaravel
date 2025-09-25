@@ -3,5 +3,5 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return "control vehicular";
+    return view('control-vehicular.ticket');
 });

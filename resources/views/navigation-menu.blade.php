@@ -103,6 +103,12 @@
                                 <x-dropdown-link href="{{ route('register') }}">
                                     Registrarse
                                 </x-dropdown-link>
+                                <x-dropdown-link href="{{ route('control-vehicular.dashboard') }}">
+                                    Control vehicular
+                                </x-dropdown-link>
+                                <x-dropdown-link href="{{ route('admin.dashboard') }}">
+                                    Administrador
+                                </x-dropdown-link>
 
                             </x-slot>
                         </x-dropdown>

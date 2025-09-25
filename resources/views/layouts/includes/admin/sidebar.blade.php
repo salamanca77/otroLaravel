@@ -10,10 +10,10 @@
             'header' => 'Administracion',
         ],
         [
-            'name' => 'Tikest',
+            'name' => 'Usuarios',
             'icon' => 'fa-solid fa-users',
-            'route' => '',
-            'active' => false,
+            'route' => route('admin.users.index'),
+            'active' => request()->routeIs('admin.users.*'),
         ],
     ];
 @endphp

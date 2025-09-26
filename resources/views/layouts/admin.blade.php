@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+    @stack('css')
     {{-- font awesome --}}
     <script src="https://kit.fontawesome.com/6a7039d20d.js" crossorigin="anonymous"></script>
 
@@ -53,6 +54,7 @@
     @livewireScripts
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
         Livewire.on('swal', data => {
             Swal.fire(data[0]);
@@ -66,6 +68,8 @@
         </script>
         }
     @endif
+
+    @stack('js')
 
 </body>
 

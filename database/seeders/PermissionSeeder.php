@@ -13,18 +13,17 @@ class PermissionSeeder extends Seeder
      */
     public function run(): void
     {
+        
         $permissions  = [
             'manage_tickets',
             'access_admin_panel',
             'manage_users',
             'manage_roles',
             'view_reports',
-        ];    
-        
-        foreach ($permissions as $pemissioin) {
-            Permission::create([
-                'name' => $pemissioin
-                ]);
+        ];
+
+        foreach ($permissions as $pemission) {
+            Permission::create(['name' => $pemission]);
         }
     }
 }

@@ -15,13 +15,14 @@ class UserController extends Controller
     {
         return view('admin.user.index');
     }
-
+    
     /**
      * Show the form for creating a new resource.
-     */
+    */
     public function create()
     {
-        //
+        
+        return view('admin.user.create');
     }
 
     /**
@@ -29,7 +30,15 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8|confirmed',
+        ]);
+
+        User::create($data);
+        return redirect()->route('admin.users.index')->with('success', 'Usuario creado exitosamente.');
+
     }
 
     /**

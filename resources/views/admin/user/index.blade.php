@@ -1,3 +1,3 @@
 <x-admin-layout>
-    hola
+    @livewire('user-table')
 </x-admin-layout>

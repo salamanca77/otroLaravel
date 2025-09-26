@@ -54,7 +54,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('admin.user.edit', compact('user'));
     }
 
     /**
@@ -62,7 +62,30 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+
+        $data = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'password' => 'nullable|min:8|confirmed',
+        ]);
+
+
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+
+        if (($data['password'])) {
+            $user->password = bcrypt($data['password']) ;
+        }
+
+        $user->save();
+
+        session()->flash('swal', [
+            'icon' => 'success',
+            'title' => 'Usuario actualizado exitosamente.',
+            'txt' => 'El usuario ha sido actualizado.',
+            ]);
+
+        return redirect()->route('admin.users.edit', $user)->with('success', 'Usuario actualizado exitosamente.');
     }
 
     /**

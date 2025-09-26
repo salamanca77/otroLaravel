@@ -27,6 +27,23 @@
                 </x-label>
                 <x-input type="password" name="password_confirmation" class="w-full" required />
             </div>
+            <div class="mb-4">
+                <x-label class="mb-1">
+                    Roles
+                </x-label>
+
+                <ul>
+                    @foreach ($roles as $role)
+                        <li>
+                            <label>
+                                <x-checkbox name="roles[]" value="{{ $role->id }}" :checked="in_array($role->id, old('role', []))" />
+                                {{ $role->name }}
+                            </label>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+
             <div class="flex justify-end">
                 <x-button>
                     Guardar

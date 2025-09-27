@@ -35,11 +35,40 @@
             </div>
 
 
-            <div class="flex justify-end">
-                <x-button class="mb-4">
+            <div class="flex justify-end space-x-2">
+                <x-danger-button onclick="confirmDelete()">
+                    Eliminar
+                </x-danger-button>
+
+                <x-button>
                     Actualizar
                 </x-button>
             </div>
         </div>
     </form>
+
+    <form id="delete-user-form" action="{{ route('admin.roles.destroy', $role) }}" method="POST">
+        @csrf
+        @method('DELETE')
+    </form>
+
+    @push('js')
+        <script>
+            function confirmDelete() {
+                Swal.fire({
+                    title: "Esta seguro?",
+                    text: "No podra revertirse!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, Borralo!",
+                    cancelButtonText: "Cancelar"
+                }).then((result) => {
+                    document.getElementById('delete-user-form').submit();
+                });
+            }
+        </script>
+    @endpush
+
 </x-admin-layout>

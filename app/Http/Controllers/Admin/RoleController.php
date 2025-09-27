@@ -32,15 +32,10 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        
-        // return $request;
-
         $data = $request->validate([
             'name' => 'required|unique:roles',
             'permissions' => 'nullable|array',
         ]);
-
-        // return $data;
 
         $role = Role::create($data);
 
@@ -53,8 +48,6 @@ class RoleController extends Controller
             'title' => 'Rol creado exitosamente',
             'text' => 'El rol ha sido creado exitosamente.',
          ]);
-
-        //  return $data['permissions'];
 
         return redirect()->route('admin.roles.edit', $role);
     }
@@ -82,6 +75,30 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
+        // return $request;
+
+        $data = $request->validate([
+            'name' => 'required|unique:roles,name,' . $role->id,
+            'permissions' => 'nullable|array',
+        ]);
+
+        // return $data;
+        
+
+        if(isset($data['permissions'])){
+            $role->permissions()->sync($data['permissions']);
+        }else{
+            $role->permissions()->detach();
+        }
+
+        session()->flash('swal', [
+            'icon' => 'success',
+            'title' => 'Rol actualizado exitosamente.',
+            'text' => 'El rol ha sido actualizado.',
+        ]);
+
+        return redirect()->route('admin.roles.edit', $role);
+
     }
 
     /**
@@ -89,6 +106,14 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        //
+        $role->delete();
+
+        session()->flash('swal', [
+            'icon' => 'success',
+            'title' => 'Rol eliminado exitosamente.',
+            'text' => 'El rol ha sido eliminado.',
+        ]);
+
+        return redirect()->route('admin.roles.index');
     }
 }

@@ -43,12 +43,9 @@ class UserController extends Controller
 
         if(isset($data['roles'])){
             $user->roles()->sync($data['roles']);
-        }else{
-            $user->roles()->detach();
         }
         
-        return redirect()->route('admin.users.index')->with('success', 'Usuario creado exitosamente.');
-
+        return redirect()->route('admin.users.index');
     }
 
     /**

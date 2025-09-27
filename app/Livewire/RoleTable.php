@@ -2,14 +2,14 @@
 
 namespace App\Livewire;
 
-use App\Models\User;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\Views\Columns\LinkColumn;
+use Spatie\Permission\Models\Role;
 
-class UserTable extends DataTableComponent
+class RoleTable extends DataTableComponent
 {
-    protected $model = User::class;
+    protected $model = Role::class;
 
     public function configure(): void
     {
@@ -23,11 +23,11 @@ class UserTable extends DataTableComponent
                 ->sortable(),
             Column::make("Name", "name")
                 ->sortable(),
-            Column::make("Email", "email")
+            Column::make("Created at", "created_at")
                 ->sortable(),
             LinkColumn::make('Edit')
                 ->title(fn($row) => 'Editar')
-                ->location(fn($row) => route('admin.users.edit', $row))
+                ->location(fn($row) => route('admin.roles.edit', $row))
         ];
     }
 }

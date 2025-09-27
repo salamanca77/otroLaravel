@@ -27,6 +27,8 @@
                 </x-label>
                 <x-input type="password" name="password_confirmation" class="w-full" required />
             </div>
+
+            {{-- Roles --}}
             <div class="mb-4">
                 <x-label class="mb-1">
                     Roles

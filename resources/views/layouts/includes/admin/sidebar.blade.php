@@ -15,6 +15,12 @@
             'route' => route('admin.users.index'),
             'active' => request()->routeIs('admin.users.*'),
         ],
+        [
+            'name' => 'Roles',
+            'icon' => 'fa-solid fa-gauge',
+            'route' => route('admin.roles.index'),
+            'active' => request()->routeIs('admin.roles.*'),
+        ],
     ];
 @endphp
 

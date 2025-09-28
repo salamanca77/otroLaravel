@@ -1,4 +1,5 @@
 <x-admin-layout>
+
     <form method="POST" action="{{ route('admin.roles.store') }}">
         @csrf
 
@@ -37,4 +38,5 @@
             </div>
         </div>
     </form>
+
 </x-admin-layout>

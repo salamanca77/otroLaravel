@@ -17,9 +17,15 @@
         ],
         [
             'name' => 'Roles',
-            'icon' => 'fa-solid fa-gauge',
+            'icon' => 'fa-solid fa-user-tag',
             'route' => route('admin.roles.index'),
             'active' => request()->routeIs('admin.roles.*'),
+        ],
+        [
+            'name' => 'Permisos',
+            'icon' => 'fa-solid fa-key',
+            'route' => route('admin.permissions.index'),
+            'active' => request()->routeIs('admin.permissions.*'),
         ],
     ];
 @endphp

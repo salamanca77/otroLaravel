@@ -85,6 +85,15 @@ class PermissionController extends Controller
      */
     public function destroy(Permission $permission)
     {
-        //
+        $permission->delete();
+
+        session()->flash('swal', [
+            'icon' => 'success',
+            'title' => 'Permiso eliminado.',
+            'text' => 'El permiso ha sido eliminado exitosamente.',
+        ]);
+
+        return redirect()->route('admin.permissions.index');
+
     }
 }

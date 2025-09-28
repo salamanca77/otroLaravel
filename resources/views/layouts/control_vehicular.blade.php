@@ -24,8 +24,8 @@
     <div class="min-h-screen bg-gray-100">
 
         @include('layouts.includes.control-vehicular.navigation')
-        @include('layouts.includes.control-vehicular.sidebar')
 
+        @include('layouts.includes.control-vehicular.sidebar')
 
         <!-- Page Heading -->
         @if (isset($header))

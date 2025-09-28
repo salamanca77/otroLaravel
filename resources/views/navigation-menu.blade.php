@@ -70,18 +70,29 @@
                                     {{ __('Profile') }}
                                 </x-dropdown-link>
 
-
-                                <div class="border-t border-gray-200"></div>
-
-                                <!-- Authentication -->
-                                <form method="POST" action="{{ route('logout') }}" x-data>
-                                    @csrf
-
-                                    <x-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
-                                        {{ __('Log Out') }}
+                                @can('manage_tickets')
+                                    <x-dropdown-link href="{{ route('control-vehicular.dashboard') }}">
+                                        Control vehicular
                                     </x-dropdown-link>
-                                </form>
+                                @endcan
+
+                                @can('manage_dashboard')
+                                    <x-dropdown-link href="{{ route('admin.dashboard') }}">
+                                        Administrador
+                                    </x-dropdown-link>
+                                @endcan
+
+                                <div class="border-t border-gray-200">
+                                    <form method="POST" action="{{ route('logout') }}" x-data>
+                                        @csrf
+
+                                        <x-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
+                                            {{ __('Log Out') }}
+                                        </x-dropdown-link>
+                                    </form>
+                                </div>
                             </x-slot>
+
                         </x-dropdown>
                     @else
                         <x-dropdown align="right" width="48">
@@ -92,22 +103,12 @@
                             </x-slot>
 
                             <x-slot name="content">
-                                <!-- Account Management -->
-                                <div class="block px-4 py-2 text-xs text-gray-400">
-                                    {{ __('Manage Account') }}
-                                </div>
 
                                 <x-dropdown-link href="{{ route('login') }}">
                                     Iniciar Sesión
                                 </x-dropdown-link>
                                 <x-dropdown-link href="{{ route('register') }}">
                                     Registrarse
-                                </x-dropdown-link>
-                                <x-dropdown-link href="{{ route('control-vehicular.dashboard') }}">
-                                    Control vehicular
-                                </x-dropdown-link>
-                                <x-dropdown-link href="{{ route('admin.dashboard') }}">
-                                    Administrador
                                 </x-dropdown-link>
 
                             </x-slot>
@@ -167,23 +168,18 @@
                     <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                         Perfil
                     </x-responsive-nav-link>
-                    @can('Leer cursos')
-                        <x-responsive-nav-link href="{{ route('instructor.courses.index') }}" :active="request()->routeIs('instructor.courses.index')">
-                            Instructor
-                        </x-responsive-nav-link>
-                    @endcan
 
-                    @can('Ver dashboard')
-                        <x-dropdown-link href="{{ route('admin.home') }}">
-                            Administrador
+                    @can('manage_tickets')
+                        <x-dropdown-link href="{{ route('control-vehicular.dashboard') }}">
+                            Control vehicular
                         </x-dropdown-link>
                     @endcan
 
-                    @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                        <x-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
-                            {{ __('API Tokens') }}
-                        </x-responsive-nav-link>
-                    @endif
+                    @can('manage_dashboard')
+                        <x-dropdown-link href="{{ route('admin.dashboard') }}">
+                            Administrador
+                        </x-dropdown-link>
+                    @endcan
 
                     <!-- Authentication -->
                     <form method="POST" action="{{ route('logout') }}" x-data>
@@ -194,37 +190,6 @@
                         </x-responsive-nav-link>
                     </form>
 
-                    <!-- Team Management -->
-                    @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
-                        <div class="border-t border-gray-200"></div>
-
-                        <div class="block px-4 py-2 text-xs text-gray-400">
-                            {{ __('Manage Team') }}
-                        </div>
-
-                        <!-- Team Settings -->
-                        <x-responsive-nav-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}"
-                            :active="request()->routeIs('teams.show')">
-                            {{ __('Team Settings') }}
-                        </x-responsive-nav-link>
-
-                        @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
-                            <x-responsive-nav-link href="{{ route('teams.create') }}" :active="request()->routeIs('teams.create')">
-                                {{ __('Create New Team') }}
-                            </x-responsive-nav-link>
-                        @endcan
-
-                        <div class="border-t border-gray-200"></div>
-
-                        <!-- Team Switcher -->
-                        <div class="block px-4 py-2 text-xs text-gray-400">
-                            {{ __('Switch Teams') }}
-                        </div>
-
-                        @foreach (Auth::user()->allTeams() as $team)
-                            <x-switchable-team :team="$team" component="responsive-nav-link" />
-                        @endforeach
-                    @endif
                 </div>
             </div>
         @else

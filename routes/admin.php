@@ -9,9 +9,17 @@ use Spatie\Permission\Contracts\Role;
 
 Route::get('/', function () {
     return view('admin.dashboard');
-})->name('dashboard');
+})
+->middleware('can:manage_dashboard')
+->name('dashboard')
+;
 
-Route::resource('users', UserController::class);
-Route::resource('roles', RoleController::class);
-Route::resource('permissions', PermissionController::class);
+Route::resource('users', UserController::class)
+->middleware('can:manage_users');
+
+Route::resource('roles', RoleController::class)
+->middleware('can:manage_roles');
+
+Route::resource('permissions', PermissionController::class)
+->middleware('can:manage_permissions');
 

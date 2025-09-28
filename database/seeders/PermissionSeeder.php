@@ -15,10 +15,11 @@ class PermissionSeeder extends Seeder
     {
         
         $permissions  = [
-            'manage_tickets',
-            'access_admin_panel',
+            'manage_dashboard',
             'manage_users',
             'manage_roles',
+            'manage_permissions',
+            'manage_tickets',
             'view_reports',
         ];
 

@@ -21,6 +21,7 @@ class RoleSeeder extends Seeder
 
        $controlVehicular->syncPermissions([
         'manage_tickets',
+        'view_reports'
        ]);
 
        $admin = Role::create([
@@ -28,10 +29,10 @@ class RoleSeeder extends Seeder
         ]);
 
        $admin->syncPermissions([
-        'access_admin_panel',
+        'manage_dashboard',
         'manage_users',
         'manage_roles',
-        'view_reports',
+        'manage_permissions',
        ]);
 
        $user = User::find(1);

@@ -71,10 +71,11 @@
                                 </x-dropdown-link>
 
                                 @can('manage_tickets')
-                                    <x-dropdown-link href="{{ route('control-vehicular.dashboard') }}">
+                                    <x-dropdown-link href="{{ route('controlVehicular.dashboard') }}">
                                         Control vehicular
                                     </x-dropdown-link>
                                 @endcan
+
 
                                 @can('manage_dashboard')
                                     <x-dropdown-link href="{{ route('admin.dashboard') }}">
@@ -170,7 +171,7 @@
                     </x-responsive-nav-link>
 
                     @can('manage_tickets')
-                        <x-dropdown-link href="{{ route('control-vehicular.dashboard') }}">
+                        <x-dropdown-link href="{{ route('controlVehicular.dashboard') }}">
                             Control vehicular
                         </x-dropdown-link>
                     @endcan

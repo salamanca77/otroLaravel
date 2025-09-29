@@ -1,34 +1,54 @@
 <x-controlVehicular-layout>
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8'">
+    <div class="max-w-4xl mx-auto mt-20 px-4 sm:px-6 lg:px-8">
         <div class="bg-white rounded-lg shadow-lg p-6">
-            <form action="" method="POST">
-                @csrf
+
+            {{-- Mostrar mensajes --}}
+            @if (session('success'))
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if (session('error'))
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                    {{ session('error') }}
+                </div>
+            @endif
+
+            <form action="{{ route('controlVehicular.ticket.store') }}" method="POST">
+                @csrf {{-- IMPORTANTE: Agregar esto --}}
+
                 <h2 class="text-2xl uppercase text-center mb-4">
-                    Crear curso
+                    Crear ticket
                 </h2>
+
                 <x-validation-errors class="mb-4" />
 
                 <x-label class="mt-1">
-                    Nombre del curso
+                    Nombre
                 </x-label>
 
                 <div class="mt-4">
-                    <x-input name="title" placeholder="Introducir nombre" class="w-full" value="{{ old('title') }}"
+                    <x-input name="nombre" placeholder="Introducir nombre" class="w-full" value="{{ old('nombre') }}"
                         oninput="string_to_slug(this.value,'#slug')" />
                 </div>
 
                 <x-label class="mt-1">
-                    Slug
+                    Placa
                 </x-label>
 
                 <div class="mt-4">
-                    <x-input id="slug" name="slug" placeholder="Introducir nombre" class="w-full"
-                        value="" />
+                    <x-input id="placa" name="placa" placeholder="Introducir placa" class="w-full"
+                        value="{{ old('placa') }}" />
                 </div>
 
-                <div class="flex justify-end">
+                <div class="mt-4">
+                    <x-input id="entrada" type="hidden" name="entrada" class="w-full" value="entrada" />
+                </div>
+
+                <div class="flex justify-end mt-4">
                     <x-button>
-                        Crear curso
+                        Adicionar
                     </x-button>
                 </div>
             </form>

@@ -38,9 +38,16 @@
             'can' => ['manage_tickets', 'view_reports'],
         ],
         [
-            'name' => 'Ticket',
+            'name' => 'Entrada',
             'icon' => 'fa-solid fa-key',
             'route' => route('controlVehicular.ticket.index'),
+            'active' => request()->routeIs('controlVehicular.ticket.*'),
+            'can' => ['manage_tickets'],
+        ],
+        [
+            'name' => 'Salida',
+            'icon' => 'fa-solid fa-key',
+            'route' => route('controlVehicular.ticket.salida'),
             'active' => request()->routeIs('controlVehicular.ticket.*'),
             'can' => ['manage_tickets'],
         ],

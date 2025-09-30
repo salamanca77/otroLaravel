@@ -15,27 +15,18 @@
                 </div>
             @endif
 
-            <form action="{{ route('controlVehicular.ticket.entrada_store') }}" method="POST">
-                @csrf {{-- IMPORTANTE: Agregar esto --}}
+            <form action="{{ route('controlVehicular.ticket.salida_store') }}" method="POST">
+                @csrf
 
                 <h2 class="text-2xl uppercase text-center mb-2">
                     Ticket
                 </h2>
 
                 <h3 class="text-2xl uppercase text-center mb-4">
-                    Entrada
+                    Salida
                 </h3>
 
                 <x-validation-errors class="mb-4" />
-
-                <x-label class="mt-1">
-                    Nombre
-                </x-label>
-
-                <div class="mt-4">
-                    <x-input name="nombre" placeholder="Introducir nombre" class="w-full" value="{{ old('nombre') }}"
-                        oninput="string_to_slug(this.value,'#slug')" />
-                </div>
 
                 <x-label class="mt-1">
                     Placa
@@ -47,7 +38,7 @@
                 </div>
 
                 <div class="mt-4">
-                    <x-input id="entrada" type="hidden" name="entrada" class="w-full" value="entrada" />
+                    <x-input id="salida" type="hidden" name="salida" class="w-full" value="salida" />
                 </div>
 
                 <div class="flex justify-end mt-4">

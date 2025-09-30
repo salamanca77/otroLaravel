@@ -19,7 +19,11 @@
     @livewireStyles
 </head>
 
-<body>
+<body x-data="{
+    open: false,
+}" :class="{
+    'overflow-hidden': open
+}" class="sm:overflow-auto">
 
     <div class="min-h-screen bg-gray-100">
 

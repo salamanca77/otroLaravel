@@ -29,11 +29,13 @@
     'overflow-hidden': open
 }" class="sm:overflow-auto">
 
+    {{-- Menu --}}
     @include('layouts.includes.admin.navigation')
 
+    {{-- sidebar --}}
     @include('layouts.includes.admin.sidebar')
 
-
+    {{-- Panel central --}}
     <div class="p-4 sm:ml-64">
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
             @isset($action)
@@ -45,9 +47,10 @@
         </div>
     </div>
 
-    <div x-cloak x-show="open" x-on:click="open = false"
+    {{-- Nose sabe --}}
+    {{-- <div x-cloak x-show="open" x-on:click="open = false"
         class="bg-gray-900 bg-opacity-50 fixed inset-0 z-30 sm:hidden">
-    </div>
+    </div> --}}
 
     @stack('modals')
 

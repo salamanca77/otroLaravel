@@ -1,6 +1,8 @@
 <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
     <div class="px-3 py-3 lg:px-5 lg:pl-3">
         <div class="flex items-center justify-between">
+
+            {{-- navegacion computacion --}}
             <div class="flex items-center justify-start rtl:justify-end">
                 <button x-on:click="open = !open" data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar"
                     aria-controls="logo-sidebar" type="button"
@@ -19,21 +21,15 @@
                         class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Flowbite</span>
                 </a>
             </div>
+
             <div class="flex items-center">
                 <div class="flex items-center ms-3">
                     <div>
-                        {{-- <button type="button"
-                            class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                            aria-expanded="false" data-dropdown-toggle="dropdown-user">
-                            <span class="sr-only">Open user menu</span>
-                            <img class="w-8 h-8 rounded-full"
-                                src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
-                        </button> --}}
-
                         <div class="ms-3 relative">
                             <x-dropdown align="right" width="48">
                                 <x-slot name="trigger">
                                     @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                                        {{-- Boton imagen     --}}
                                         <button
                                             class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
                                             <img class="size-8 rounded-full object-cover"
@@ -41,6 +37,7 @@
                                                 alt="{{ Auth::user()->name }}" />
                                         </button>
                                     @else
+                                        {{-- Boton texto --}}
                                         <span class="inline-flex rounded-md">
                                             <button type="button"
                                                 class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
@@ -58,24 +55,19 @@
                                 </x-slot>
 
                                 <x-slot name="content">
-                                    <!-- Account Management -->
+                                    <!-- Adminiatracion de cuenta -->
                                     <div class="block px-4 py-2 text-xs text-gray-400">
                                         {{ __('Manage Account') }}
                                     </div>
 
+                                    {{-- Perfil --}}
                                     <x-dropdown-link href="{{ route('profile.show') }}">
                                         {{ __('Profile') }}
                                     </x-dropdown-link>
 
-                                    @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                                        <x-dropdown-link href="{{ route('api-tokens.index') }}">
-                                            {{ __('API Tokens') }}
-                                        </x-dropdown-link>
-                                    @endif
-
                                     <div class="border-t border-gray-200"></div>
 
-                                    <!-- Authentication -->
+                                    {{-- Finalizar sesion --}}
                                     <form method="POST" action="{{ route('logout') }}" x-data>
                                         @csrf
 
@@ -87,6 +79,7 @@
                             </x-dropdown>
                         </div>
                     </div>
+
                     <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-sm shadow-sm dark:bg-gray-700 dark:divide-gray-600"
                         id="dropdown-user">
                         <div class="px-4 py-3" role="none">

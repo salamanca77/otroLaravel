@@ -4,13 +4,15 @@
 
             {{-- Mostrar mensajes --}}
             @if (session('success'))
-                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+                <div id="alert-success"
+                    class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4 transition-opacity duration-500">
                     {{ session('success') }}
                 </div>
             @endif
 
             @if (session('error'))
-                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                <div id="alert-error"
+                    class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 transition-opacity duration-500">
                     {{ session('error') }}
                 </div>
             @endif
@@ -49,4 +51,38 @@
             </form>
         </div>
     </div>
+
+    @push('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Auto-ocultar mensajes después de 3 segundos
+                const alerts = ['alert-success', 'alert-error'];
+
+                alerts.forEach(alertId => {
+                    const alert = document.getElementById(alertId);
+                    if (alert) {
+                        setTimeout(() => {
+                            alert.style.opacity = '0';
+                            setTimeout(() => alert.remove(), 500);
+                        }, 3000);
+                    }
+                });
+
+                // Ocultar mensajes al escribir en el campo placa
+                const placaInput = document.getElementById('placa');
+                if (placaInput) {
+                    placaInput.addEventListener('input', function() {
+                        alerts.forEach(alertId => {
+                            const alert = document.getElementById(alertId);
+                            if (alert) {
+                                alert.style.opacity = '0';
+                                setTimeout(() => alert.remove(), 500);
+                            }
+                        });
+                    });
+                }
+            });
+        </script>
+    @endpush
+
 </x-controlVehicular-layout>

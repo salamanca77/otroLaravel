@@ -16,7 +16,7 @@
             @endif
 
             <form action="{{ route('controlVehicular.ticket.entrada_store') }}" method="POST">
-                @csrf {{-- IMPORTANTE: Agregar esto --}}
+                @csrf
 
                 <h2 class="text-2xl uppercase text-center mb-2">
                     Ticket

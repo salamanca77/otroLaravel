@@ -33,7 +33,7 @@ class TicketController extends Controller
 
             // Verificar si la petición fue exitosa
             if ($response->successful()) {
-                return redirect()->back()->with('success', 'Ticket creado exitosamente');
+                return redirect()->back()->with('success', 'Entrada creada exitosamente');
             } else {
                 return redirect()->back()->with('error', 'Error al comunicarse con el servicio: ' . $response->status());
             }
@@ -58,7 +58,7 @@ class TicketController extends Controller
 
             // Verificar si la petición fue exitosa
             if ($response->successful()) {
-                return redirect()->back()->with('success', 'Ticket creado exitosamente');
+                return redirect()->back()->with('success', 'Salida creada exitosamente');
             } else {
                 return redirect()->back()->with('error', 'Error al comunicarse con el servicio: ' . $response->status());
             }

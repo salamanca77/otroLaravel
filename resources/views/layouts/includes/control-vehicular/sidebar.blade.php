@@ -40,7 +40,7 @@
         [
             'name' => 'Entrada',
             'icon' => 'fa-solid fa-key',
-            'route' => route('controlVehicular.ticket.index'),
+            'route' => route('controlVehicular.ticket.entrada'),
             'active' => request()->routeIs('controlVehicular.ticket.*'),
             'can' => ['manage_tickets'],
         ],

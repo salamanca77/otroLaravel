@@ -15,6 +15,10 @@ class TicketController extends Controller
 
     }
 
+    public function entrada() {
+        return view('controlVehicular.entrada');
+    }
+
     public function entrada_store(Request $request){
         
         $data = $request->validate([
@@ -42,6 +46,10 @@ class TicketController extends Controller
         }
     }
 
+    public function salida(){
+        return view ('controlVehicular.salida');
+    }
+
     public function salida_store(Request $request){
         
         $data = $request->validate([
@@ -67,7 +75,4 @@ class TicketController extends Controller
         }
     }
     
-    public function salida(){
-        return view ('controlVehicular.salida');
-    }
 }

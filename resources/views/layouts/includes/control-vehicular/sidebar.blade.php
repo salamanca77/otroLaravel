@@ -51,6 +51,20 @@
             'active' => request()->routeIs('controlVehicular.ticket.*'),
             'can' => ['manage_tickets'],
         ],
+        [
+            'name' => 'Tarifa',
+            'icon' => 'fa-solid fa-key',
+            'route' => route('controlVehicular.ticket.lista'),
+            'active' => request()->routeIs('controlVehicular.ticket.*'),
+            'can' => ['manage_tickets'],
+        ],
+        [
+            'name' => 'Reporte',
+            'icon' => 'fa-solid fa-chart-line',
+            'route' => route('controlVehicular.ticket.registro'),
+            'active' => request()->routeIs('controlVehicular.ticket.*'),
+            'can' => ['manage_tickets'],
+        ],
     ];
 @endphp
 

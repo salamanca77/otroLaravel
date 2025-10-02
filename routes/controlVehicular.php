@@ -26,3 +26,11 @@ Route::get('ticket/salida', [TicketController::class, 'salida'])
 Route::post('ticket/salida_store', [TicketController::class, 'salida_store'])
     ->name('ticket.salida_store')  // Se convierte en: controlVehicular.ticket.store
     ->middleware('can:manage_tickets');
+
+Route::get('ticket/lista', [TicketController::class, 'lista'])
+    ->name('ticket.lista')  // Se convierte en: controlVehicular.ticket.store
+    ->middleware('can:manage_tickets');
+
+Route::get('ticket/registro', [TicketController::class, 'registro'])
+    ->name('ticket.registro')  // Se convierte en: controlVehicular.ticket.store
+    ->middleware('can:manage_tickets');

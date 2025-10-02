@@ -6,4 +6,5 @@
     </x-slot>
 
     @livewire('role-table')
+
 </x-admin-layout>

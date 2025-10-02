@@ -14,6 +14,13 @@ Route::get('/', function () {
 ->name('dashboard')
 ;
 
+// Ruta para la configuración de la tarifa
+Route::get('tarifa', function () {
+    return view('admin.tarifa.index');
+})
+->middleware('can:manage_dashboard') // O un nuevo permiso, ej: 'manage_tarifa'
+->name('tarifa.index');
+
 Route::resource('users', UserController::class)
 ->middleware('can:manage_users');
 

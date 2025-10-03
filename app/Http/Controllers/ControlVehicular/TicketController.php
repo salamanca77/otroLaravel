@@ -71,7 +71,12 @@ class TicketController extends Controller
 
         $registro->save();
 
-        return redirect()->route('controlVehicular.ticket.salida')->with('success', 'Salida registrada. Total a pagar: $' . number_format($registro->monto_a_pagar, 2));
+        $registro = Registro::where('placa', $request->placa)->latest()->first();
+
+        // return $registro;
+        
+        // return redirect()->route('controlVehicular.ticket.salida')->with('success', 'Salida registrada. Total a pagar: $' . number_format($registro->monto_a_pagar, 2));
+        return redirect()->route('controlVehicular.ticket.imprimir', ['id' => $registro->id]);
     }
 
     public function lista(){
@@ -88,5 +93,12 @@ class TicketController extends Controller
         // return 'hola';
         return view('controlVehicular.reporte');
     }
+
+    public function imprimir($id)
+{
+    $registro = Registro::findOrFail($id);
+    
+    return view('controlVehicular.imprimir', compact('registro'));
+}
     
 }

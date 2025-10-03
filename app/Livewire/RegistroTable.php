@@ -6,6 +6,7 @@ use App\Models\Registro;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Carbon;
 
 class RegistroTable extends DataTableComponent
 {
@@ -36,17 +37,20 @@ class RegistroTable extends DataTableComponent
                 ->searchable(),
 
             Column::make("Fecha entrada", "fecha_entrada")
-                ->sortable(),
+                ->sortable()
+                ->format(fn($value) => Carbon::parse($value)->format('d/m/y')),
 
             Column::make("Hora entrada", "hora_entrada")
-                ->sortable(),
+                ->sortable()
+                ->format(fn($value) => Carbon::parse($value)->format('H:i')),
 
             Column::make("Fecha salida", "fecha_salida")
-                ->sortable(),
+                ->sortable()
+                ->format(fn($value) => Carbon::parse($value)->format('d/m/y')),
 
             Column::make("Hora salida", "hora_salida")
-                ->sortable(),
-
+                ->sortable()
+                ->format(fn($value) => Carbon::parse($value)->format('H:i')),
             Column::make("Observación", "obsevacion")
                 ->searchable(),
 

@@ -32,14 +32,17 @@
         <p><strong>Tipo de tarifa:</strong> {{ $registro->tipo_tarifa }}</p>
         <p><strong>Tarifa:</strong> ${{ number_format($registro->tarifa, 2) }}</p>
     </div>
+    <div style="text-align: center; margin-top: 20px;">
+        <button onclick="window.print()">Imprimir de Nuevo</button>
+        <button onclick="window.location.href = '{{ route('controlVehicular.ticket.salida') }}'">Volver a Salida</button>
+    </div>
     <script>
+        // Imprime automáticamente la primera vez que carga la página.
         window.onload = function() {
             window.print();
-            setTimeout(function() {
-                window.location.href = "{{ route('controlVehicular.ticket.salida') }}";
-            }, 1000); // Espera 1 segundo antes de redirigir
         };
 
+        /* --- Se comenta el código de QZ Tray para evitar errores en la consola si no está instalado ---
         qz.websocket.connect().then(() => {
             var config = qz.configs.create("Nombre de la impresora"); // Cambia por el nombre real
             var data = [{
@@ -49,6 +52,7 @@
             }];
             qz.print(config, data).catch(console.error);
         });
+        */
     </script>
 </body>
 

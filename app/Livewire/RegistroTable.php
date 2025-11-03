@@ -2,11 +2,9 @@
 
 namespace App\Livewire;
 
-use App\Models\Registro;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Carbon;
+use App\Models\Registro;
 
 class RegistroTable extends DataTableComponent
 {
@@ -15,58 +13,35 @@ class RegistroTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id');
-        // $this->setTableAttributes([
-        //     'class' => 'table-auto w-full divide-y divide-gray-200',
-        // ]);
-    }
-
-    public function builder(): Builder
-    {
-        return Registro::query();
     }
 
     public function columns(): array
     {
         return [
+            Column::make("Id", "id")
+                ->sortable(),
             Column::make("Nombre", "nombre")
-                ->sortable()
-                ->searchable(),
-
+                ->sortable(),
             Column::make("Placa", "placa")
-                ->sortable()
-                ->searchable(),
-
+                ->sortable(),
             Column::make("Fecha entrada", "fecha_entrada")
-                ->sortable()
-                ->format(fn($value) => Carbon::parse($value)->format('d/m/y')),
-
+                ->sortable(),
             Column::make("Hora entrada", "hora_entrada")
-                ->sortable()
-                ->format(fn($value) => Carbon::parse($value)->format('H:i')),
-
+                ->sortable(),
             Column::make("Fecha salida", "fecha_salida")
-                ->sortable()
-                ->format(fn($value) => Carbon::parse($value)->format('d/m/y')),
-
+                ->sortable(),
             Column::make("Hora salida", "hora_salida")
-                ->sortable()
-                ->format(fn($value) => Carbon::parse($value)->format('H:i')),
-            Column::make("Observación", "obsevacion")
-                ->searchable(),
-
-            Column::make("Tiempo de estancia (min)", "tiempo_de_estancia")
                 ->sortable(),
-
+            Column::make("Obsevacion", "obsevacion")
+                ->sortable(),
+            Column::make("Tiempo de estancia", "tiempo_de_estancia")
+                ->sortable(),
             Column::make("Monto a pagar", "monto_a_pagar")
-                ->sortable()
-                ->format(fn($value) => '$' . number_format($value, 2)),
-
-            Column::make("Tipo de tarifa", "tipo_tarifa")
                 ->sortable(),
-
-            Column::make("Tarifa", "tarifa")
-                ->sortable()
-                ->format(fn($value) => '$' . number_format($value, 2)),
+            Column::make("Created at", "created_at")
+                ->sortable(),
+            Column::make("Updated at", "updated_at")
+                ->sortable(),
         ];
     }
 }

@@ -38,3 +38,8 @@ Route::get('ticket/registro', [TicketController::class, 'registro'])
 Route::get('ticket/imprimir/{id}', [TicketController::class, 'imprimir'])
     ->name('ticket.imprimir')
     ->middleware('can:manage_tickets');
+
+Route::get('impresiones/pendientes', [TicketController::class, 'impresionesPendientes'])
+    ->name('controlVehicular.impresiones.pendientes');
+
+Route::post('impresion-marcada/{id}', [TicketController::class, 'marcarImpresion']);

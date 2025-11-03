@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\ControlVehicular;
 
 use App\Http\Controllers\Controller;
+use App\Models\ImpresionePendiente;
 use App\Models\Registro;
 use App\Models\Tarifa;
 use Carbon\Carbon;
@@ -71,9 +72,13 @@ class TicketController extends Controller
 
         $registro->save();
 
-        $registro = Registro::where('placa', $request->placa)->latest()->first();
+        // Dispara el evento para la impresión en tiempo real
+        \App\Events\RegistroCreadoEvent::dispatch($registro);
 
-        // return $registro;
+        ImpresionePendiente::create([
+            'registro_id' => $registro->id,
+            'estado' => 'pendiente'
+        ]);
         
         // return redirect()->route('controlVehicular.ticket.salida')->with('success', 'Salida registrada. Total a pagar: $' . number_format($registro->monto_a_pagar, 2));
         return redirect()->route('controlVehicular.ticket.imprimir', ['id' => $registro->id]);
@@ -84,21 +89,43 @@ class TicketController extends Controller
         return view('controlVehicular.lista');
     }
 
-    // public function reporte(){
-
-    //     return view('controlVehicular.reporte');
-    // }
-
     public function registro(){
         // return 'hola';
         return view('controlVehicular.reporte');
     }
 
-    public function imprimir($id)
-{
-    $registro = Registro::findOrFail($id);
+    public function imprimir($id){
+        
+        $registro = Registro::findOrFail($id);
     
-    return view('controlVehicular.imprimir', compact('registro'));
-}
-    
+        return view('controlVehicular.imprimir', compact('registro'));
+    }
+
+    public function impresionesPendientes()
+    {
+        $tickets = ImpresionePendiente::where('estado', 'pendiente')
+            ->with('registro')
+            ->get()
+            ->map(function($impresion) {
+                return [
+                    'id' => $impresion->id,
+                    'nombre' => $impresion->registro->nombre,
+                    'placa' => $impresion->registro->placa,
+                    'fecha_entrada' => $impresion->registro->fecha_entrada,
+                    'fecha_salida' => $impresion->registro->fecha_salida,
+                    'monto_a_pagar' => $impresion->registro->monto_a_pagar,
+                ];
+            });
+        return response()->json($tickets);
+    }
+
+    public function marcarImpresion($id)
+    {
+        $impresion = ImpresionePendiente::find($id);
+        if ($impresion) {
+            $impresion->estado = 'impreso';
+            $impresion->save();
+        }
+        return response()->json(['success' => true]);
+    }
 }

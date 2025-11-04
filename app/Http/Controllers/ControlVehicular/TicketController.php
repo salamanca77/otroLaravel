@@ -8,6 +8,7 @@ use App\Models\Registro;
 use App\Models\Tarifa;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class TicketController extends Controller
 {
@@ -94,13 +95,14 @@ class TicketController extends Controller
         return view('controlVehicular.reporte');
     }
 
-    public function imprimir($id){
+    // public function imprimir($id){
         
-        $registro = Registro::findOrFail($id);
+    //     $registro = Registro::findOrFail($id);
     
-        return view('controlVehicular.imprimir', compact('registro'));
-    }
+    //     return view('controlVehicular.imprimir', compact('registro'));
+    // }
 
+    
     public function impresionesPendientes()
     {
         $tickets = ImpresionePendiente::where('estado', 'pendiente')
@@ -127,5 +129,63 @@ class TicketController extends Controller
             $impresion->save();
         }
         return response()->json(['success' => true]);
+    }
+
+    public function imprimirTicketSalida($id)
+    {
+        // Obtener el registro
+        $registro = \App\Models\Registro::findOrFail($id);
+        
+        // Generar el contenido del ticket en texto plano
+        $ticket = $this->generarTicketTexto($registro);
+        
+        // Enviar al servidor de impresión
+        try {
+            $response = Http::timeout(5)->post('http://192.168.100.213:3000/imprimir-texto', [
+                'contenido' => $ticket,
+                'impresora' => 'EPSON L220 Series'
+            ]);
+            
+            if ($response->successful()) {
+                return response()->json([
+                    'success' => true,
+                    'mensaje' => 'Ticket enviado a impresión correctamente'
+                ]);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'mensaje' => 'Error al enviar a impresora'
+                ], 500);
+            }
+            
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'mensaje' => 'No se pudo conectar con el servidor de impresión: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+     private function generarTicketTexto($registro)
+    {
+        $fechaEntrada = \Carbon\Carbon::parse($registro->fecha_entrada)->format('d/m/Y H:i');
+        $fechaSalida = \Carbon\Carbon::parse($registro->fecha_salida)->format('d/m/Y H:i');
+        
+        return "
+========================================
+         TICKET DE SALIDA
+========================================
+Nombre: {$registro->nombre}
+Placa: {$registro->placa}
+Fecha entrada: {$fechaEntrada}
+Fecha salida: {$fechaSalida}
+Tiempo: {$registro->tiempo_de_estancia} min
+Monto a pagar: $" . number_format($registro->monto_a_pagar, 2) . "
+Tipo tarifa: {$registro->tipo_tarifa}
+Tarifa: $" . number_format($registro->tarifa, 2) . "
+========================================
+     ¡Gracias por su preferencia!
+========================================
+        ";
     }
 }

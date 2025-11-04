@@ -35,7 +35,7 @@ Route::get('ticket/registro', [TicketController::class, 'registro'])
     ->name('ticket.registro')  // Se convierte en: controlVehicular.ticket.store
     ->middleware('can:manage_tickets');
 
-Route::get('ticket/imprimir/{id}', [TicketController::class, 'imprimirTicketSalida'])
+Route::get('ticket/imprimir/{id}', [TicketController::class, 'imprimir'])
     ->name('ticket.imprimir')
     ->middleware('can:manage_tickets');
 

@@ -82,7 +82,7 @@ class TicketController extends Controller
         ]);
         
         // return redirect()->route('controlVehicular.ticket.salida')->with('success', 'Salida registrada. Total a pagar: $' . number_format($registro->monto_a_pagar, 2));
-        return redirect()->route('controlVehicular.ticket.imprimir', ['id' => $registro->id]);
+        // return redirect()->route('controlVehicular.ticket.imprimir', ['id' => $registro->id]);
     }
 
     public function lista(){

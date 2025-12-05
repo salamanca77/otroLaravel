@@ -38,7 +38,9 @@ class TicketController extends Controller
         ]);
         
         // Dispara el evento para  Pixel de Facebook CAPI
-        app(CapiController::class)->vehicleCheckIn($data);
+        // Consigue tu código de prueba en: https://www.facebook.com/events_manager2/list/pixel/[TU_PIXEL_ID]/test_events
+        $test_event_code = 'TEST80588';
+        app(CapiController::class)->vehicleCheckIn($data, $test_event_code);
 
        return redirect()->route('controlVehicular.ticket.entrada')->with('success', 'Registro de entrada guardado con éxito.');
     }

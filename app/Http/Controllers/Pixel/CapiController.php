@@ -11,8 +11,7 @@ class CapiController extends Controller
     public function vehicleCheckIn($cliente, $test_event_code = null)
     {
         $pixel_id = '724475990694850';
-        $token = 'EAA86FKeGdcUBQDIYPek4ZAa2C6kScXGGnIIZCnG2wr77eKqAIZCYhxZAUdnDIQM4fk850EQ7PHKnJbXSlZCHE01gDBQZCi1Ofm6aZAehNSZC5oRmXOvhVCKCqSyllPfoPz7zPLiD9JVccKFjdhqJZBjlJ2pCMBJyJhcxZBLvFwxNkbDlcMRfLStY00jfwU6MDI7IKo3gZDZD';
-
+        $token = 'EAA86FKeGdcUBQE7HDJR9MoGJcOaalrItn3J8PbaDYM0wZBdlWAfQHrWfMXUHm132JhGBZBKm7CcW0SXQ7bx6DiPJysPNtRLr7QkplUKZAQUFZA3QTxKzkECyadnT4hGQD18ifWypNO4Q6m8VSY7JZAk1S9VXJ2gsbfLZCA5sqJ75SEJzwn9mEOWFrSIIS4fNpCbAZDZD';
         $payload = [
             "data" => [
                 [

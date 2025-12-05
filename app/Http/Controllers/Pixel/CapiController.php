@@ -24,8 +24,8 @@ class CapiController extends Controller
                     //     "em" => hash('sha256', strtolower(trim($cliente->email))),
                     // ],
                     "custom_data" => [
-                        "nombre" => $cliente->nombre,
-                        "placa" => $cliente->placa,
+                        "nombre" => $cliente['nombre'],
+                        "placa" => $cliente['placa'],
                     ]
                 ]
             ]

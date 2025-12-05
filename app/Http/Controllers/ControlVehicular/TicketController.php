@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\ControlVehicular;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Pixel\CapiController;
 use App\Models\ImpresionePendiente;
 use App\Models\Registro;
 use App\Models\Tarifa;
@@ -36,6 +37,9 @@ class TicketController extends Controller
             'hora_entrada' => Carbon::now()->toTimeString(),
         ]);
         
+        // Dispara el evento para  Pixel de Facebook CAPI
+        app(CapiController::class)->vehicleCheckIn($data);
+
        return redirect()->route('controlVehicular.ticket.entrada')->with('success', 'Registro de entrada guardado con éxito.');
     }
 

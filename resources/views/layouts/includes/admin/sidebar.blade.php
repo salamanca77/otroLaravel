@@ -38,7 +38,7 @@
             'can' => ['manage_tickets', 'view_reports'],
         ],
         [
-            'name' => 'Entradass',
+            'name' => 'Entrada',
             'icon' => 'fa-solid fa-key',
             'route' => route('controlVehicular.ticket.entrada'),
             'active' => request()->routeIs('controlVehicular.ticket.*'),

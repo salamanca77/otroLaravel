@@ -55,6 +55,9 @@
     @stack('modals')
     @stack('scripts')
     @livewireScripts
+
+    {{-- pixel de facebook --}}
+    @include('pixel.pixel');
 </body>
 
 </html>

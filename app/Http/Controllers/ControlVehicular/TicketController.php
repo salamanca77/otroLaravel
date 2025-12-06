@@ -37,19 +37,8 @@ class TicketController extends Controller
             'hora_entrada' => Carbon::now()->toTimeString(),
         ]);
         
-        try {
-            // Dispara el evento para  Pixel de Facebook CAPI
-            // Consigue tu código de prueba en: https://www.facebook.com/events_manager2/list/pixel/[TU_PIXEL_ID]/test_events
-            $test_event_code = 'TEST96069';
-            $response = app(CapiController::class)->vehicleCheckIn($request, $data, $test_event_code);
-
-            // ¡¡¡SOLO PARA DEPURACIÓN!!! Muestra la respuesta exitosa de Meta.
-            dd('Respuesta exitosa de la API de Meta:', $response);
-
-        } catch (\Exception $e) {
-            // ¡¡¡SOLO PARA DEPURACIÓN!!! Muestra el error exacto y detiene la ejecución.
-            dd('Error al enviar el evento a la API de Meta:', $e->getMessage());
-        }
+        // Dispara el evento para  Pixel de Facebook CAPI
+        app(CapiController::class)->vehicleCheckIn($request, $data);
 
        return redirect()->route('controlVehicular.ticket.entrada')->with('success', 'Registro de entrada guardado con éxito.');
     }

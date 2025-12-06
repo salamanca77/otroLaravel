@@ -39,13 +39,19 @@ class CapiController extends Controller
         $url = "https://graph.facebook.com/v18.0/$pixel_id/events?access_token=$token";
 
         $response = Http::post($url, $payload);
+        $body = $response->json();
 
         // Registramos la respuesta de la API de Meta para depuración
         Log::info('Respuesta de la API de Conversiones de Facebook: ', [
             'status' => $response->status(),
-            'body' => $response->json()
+            'body' => $body
         ]);
 
-        return $response->json();
+        // Forzar un error si la respuesta de la API contiene un error, para que el dd() lo atrape.
+        if (isset($body['error'])) {
+            throw new \Exception('Error devuelto por la API de Meta: ' . json_encode($body['error']));
+        }
+
+        return $body;
     }
 }

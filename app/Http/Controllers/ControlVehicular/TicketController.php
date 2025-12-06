@@ -40,8 +40,8 @@ class TicketController extends Controller
         try {
             // Dispara el evento para  Pixel de Facebook CAPI
             // Consigue tu código de prueba en: https://www.facebook.com/events_manager2/list/pixel/[TU_PIXEL_ID]/test_events
-            $test_event_code = 'REEMPLAZA_CON_TU_CODIGO_DE_PRUEBA';
-            app(CapiController::class)->vehicleCheckIn($data, $test_event_code);
+            $test_event_code = 'TEST96069';
+            app(CapiController::class)->vehicleCheckIn($request, $data, $test_event_code);
         } catch (\Exception $e) {
             // ¡¡¡SOLO PARA DEPURACIÓN!!! Muestra el error exacto y detiene la ejecución.
             dd('Error al enviar el evento a la API de Meta:', $e->getMessage());

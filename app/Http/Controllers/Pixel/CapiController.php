@@ -3,15 +3,17 @@
 namespace App\Http\Controllers\Pixel;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 class CapiController extends Controller
 {
-    public function vehicleCheckIn($cliente, $test_event_code = null)
+    public function vehicleCheckIn(Request $request, $cliente, $test_event_code = null)
     {
         $pixel_id = '724475990694850';
-        $token = 'EAA86FKeGdcUBQE7HDJR9MoGJcOaalrItn3J8PbaDYM0wZBdlWAfQHrWfMXUHm132JhGBZBKm7CcW0SXQ7bx6DiPJysPNtRLr7QkplUKZAQUFZA3QTxKzkECyadnT4hGQD18ifWypNO4Q6m8VSY7JZAk1S9VXJ2gsbfLZCA5sqJ75SEJzwn9mEOWFrSIIS4fNpCbAZDZD';
+        $token = 'EAA86FKeGdcUBQDIYPek4ZAa2C6kScXGGnIIZCnG2wr77eKqAIZCYhxZAUdnDIQM4fk850EQ7PHKnJbXSlZCHE01gDBQZCi1Ofm6aZAehNSZC5oRmXOvhVCKCqSyllPfoPz7zPLiD9JVccKFjdhqJZBjlJ2pCMBJyJhcxZBLvFwxNkbDlcMRfLStY00jfwU6MDI7IKo3gZDZD';
+
         $payload = [
             "data" => [
                 [
@@ -19,10 +21,12 @@ class CapiController extends Controller
                     "event_time" => time(),
                     "event_id" => uniqid(),
                     "action_source" => "website",
-                    // "user_data" => [
-                    //     "ph" => hash('sha256', $cliente->telefono),
-                    //     "em" => hash('sha256', strtolower(trim($cliente->email))),
-                    // ],
+                    "user_data" => [
+                        "client_ip_address" => $request->ip(),
+                        "client_user_agent" => $request->userAgent(),
+                        "fbc" => $request->cookie('_fbc'),
+                        "fbp" => $request->cookie('_fbp'),
+                    ],
                     "custom_data" => [
                         "nombre" => $cliente['nombre'],
                         "placa" => $cliente['placa'],

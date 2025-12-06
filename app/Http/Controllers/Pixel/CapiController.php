@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Http;
 
 class CapiController extends Controller
 {
-    public function vehicleCheckIn(Request $request, $cliente)
+    public function vehicleCheckIn(Request $request, $cliente, $test_event_code = null)
     {
         $pixel_id = '724475990694850';
         $token = 'EAA86FKeGdcUBQDIYPek4ZAa2C6kScXGGnIIZCnG2wr77eKqAIZCYhxZAUdnDIQM4fk850EQ7PHKnJbXSlZCHE01gDBQZCi1Ofm6aZAehNSZC5oRmXOvhVCKCqSyllPfoPz7zPLiD9JVccKFjdhqJZBjlJ2pCMBJyJhcxZBLvFwxNkbDlcMRfLStY00jfwU6MDI7IKo3gZDZD';
@@ -33,6 +33,10 @@ class CapiController extends Controller
                 ]
             ]
         ];
+
+        if ($test_event_code) {
+            $payload['test_event_code'] = $test_event_code;
+        }
 
         $url = "https://graph.facebook.com/v18.0/$pixel_id/events?access_token=$token";
 

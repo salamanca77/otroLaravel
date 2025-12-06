@@ -38,6 +38,14 @@ class TicketController extends Controller
         ]);
         
         // Dispara el evento para  Pixel de Facebook CAPI
+        /*
+        // Para depurar eventos del servidor en tiempo real:
+        // 1. Ve a: Administrador de Eventos > Probar eventos > Eventos del servidor.
+        // 2. Copia tu código de prueba.
+        // 3. Descomenta las siguientes dos líneas y pega tu código.
+        // $test_event_code = 'PEGA_TU_CODIGO_DE_PRUEBA_AQUI';
+        // app(CapiController::class)->vehicleCheckIn($request, $data, $test_event_code);
+        */
         app(CapiController::class)->vehicleCheckIn($request, $data);
 
        return redirect()->route('controlVehicular.ticket.entrada')->with('success', 'Registro de entrada guardado con éxito.');
